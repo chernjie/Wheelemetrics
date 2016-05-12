@@ -2,9 +2,16 @@
 layout: default
 ---
 
-<label><input type="checkbox" id="reverse" checked="checked"> reverse</label>
+## Wheelemetrics visualization
 
-<div id="chart" style="height:80%"></div>
+* drag and drop the log file anywhere in this window
+* https://github.com/esaj/Wheelemetrics
+
+<label>
+    <input type="checkbox" id="reverse" checked="checked"> reverse direction
+</label>
+
+<div id="chart"></div>
 
 <script type="text/javascript">
     google.charts.load('current', {'packages':['annotatedtimeline']});
