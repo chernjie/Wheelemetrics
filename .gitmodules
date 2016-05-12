@@ -1,0 +1,3 @@
+[submodule "assets/js/PapaParse"]
+	path = assets/js/PapaParse
+	url = https://github.com/mholt/PapaParse
