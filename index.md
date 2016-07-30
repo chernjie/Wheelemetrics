@@ -7,9 +7,8 @@ layout: default
 * drag and drop the log file anywhere in this window
 * https://github.com/esaj/Wheelemetrics
 
-<label>
-    <input type="checkbox" id="reverse" checked="checked"> reverse direction
-</label>
+<input type="checkbox" id="reverse" checked="checked">
+<label> reverse direction </label>
 
 <div id="chart"></div>
 
@@ -27,8 +26,11 @@ layout: default
         },
     };
 
+    var lastResults = [];
+
     function completeFn(results) {
         console.log(results);
+        lastResults = results;
 
         var reverse = $('#reverse').is(':checked') ? -1 : 1;
         var rows = results.data.map(processInput);
@@ -45,15 +47,16 @@ layout: default
         var element = document.getElementById('chart');
 
         function processInput(data) {
-            data[0] = new Date(data[0]);
-            data[1] *= reverse;
-            data[2] *= reverse / 100;
-            data[3]  = data[3];
-            data[4] *= reverse;
-            data[5]  = data[5];
-            delete data[6];
-            delete data[7];
-            return data;
+            return [
+                new Date(data[0]),
+                data[1] * reverse,
+                data[2] * reverse / 100,
+                data[3],
+                data[4] * reverse,
+                data[5],
+                ,
+                ,
+                ];
         }
 
             var data = new google.visualization.DataTable();
@@ -77,8 +80,11 @@ layout: default
     });
 
     var $reverse = $('#reverse');
-    $reverse.parent().click(function (event) {
+    $reverse.next().click(function (event) {
         $reverse.prop('checked', ! $reverse.prop('checked'));
-        config.file && Papa.parse(config.file, config);
+        lastResults && completeFn(lastResults);
+    });
+    $reverse.click(function (event) {
+        lastResults && completeFn(lastResults);
     });
 </script>
