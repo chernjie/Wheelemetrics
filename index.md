@@ -14,7 +14,7 @@ layout: default
 <div id="chart"></div>
 
 <script type="text/javascript">
-    google.charts.load('current', {'packages':['annotatedtimeline']});
+    google.charts.load('current', {'packages':['annotationchart']});
 
     var config = {
         header: false,
@@ -56,15 +56,13 @@ layout: default
             return data;
         }
 
-        google.charts.setOnLoadCallback(function () {
             var data = new google.visualization.DataTable();
             columns.forEach(function (column) {
                 data.addColumn(column.type, column.name);
             })
             data.addRows(rows);
-            var chart = new google.visualization.AnnotatedTimeLine(element);
+            var chart = new google.visualization.AnnotationChart(element);
             chart.draw(data, {displayAnnotations: true});
-        });
     }
 
     $('.wrapper').on('drag dragstart dragend dragover dragenter dragleave drop', function(event) {
